@@ -12,14 +12,16 @@ import { useNavigate } from "react-router";
 
 function Header() {
   const navigate = useNavigate();
+
   const loginNavigate = () => {
     navigate("/login");
   };
+  
   const registerNavigate = () => {
     navigate("/register");
   };
   return (
-    <AppBar position="sticky">
+    <AppBar position="relative">
       <Toolbar>
         {/* Menu Button */}
         <IconButton color="inherit">
@@ -27,7 +29,7 @@ function Header() {
         </IconButton>
 
         {/* Title */}
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" sx={{ flexGrow: 1 }}>
           My Website
         </Typography>
 
