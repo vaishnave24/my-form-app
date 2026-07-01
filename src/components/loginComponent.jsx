@@ -7,15 +7,18 @@ function LoginPageComponent() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
   const handelSubmit = async (e) => {
     console.log("called", form);
     e.preventDefault();
-    try {
-      const response = await loginUser(form);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (onValidateForm()) {
+      try {
+        const response = await loginUser(form);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -24,7 +27,27 @@ function LoginPageComponent() {
       ...form,
       [e.target.name]: e.target.value,
     });
+    setError({
+      ...error,
+      [e.target.name]: "",
+    });
   };
+
+  //Validation controlled
+  const onValidateForm = () => {
+    let errorShow = {};
+    if (!form.email) {
+      errorShow.email = "Email is required";
+    }
+    if (!form.password) {
+      errorShow.password = "Password is required";
+    } else if (form.password.length < 7) {
+      errorShow.password = "Password must be at least 7 characters long";
+    }
+    setError(errorShow);
+    return Object.keys(errorShow).length === 0;
+  };
+
   return (
     <>
       <Box
@@ -68,6 +91,8 @@ function LoginPageComponent() {
               name="email"
               value={form.email}
               onChange={handelChange}
+              error={!!error?.email}
+              helperText={error?.email}
               fullWidth
             />
 
@@ -77,6 +102,8 @@ function LoginPageComponent() {
               type="password"
               value={form.password}
               onChange={handelChange}
+              error={!!error?.password}
+              helperText={error?.password}
               fullWidth
             />
 
