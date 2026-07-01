@@ -5,6 +5,7 @@ import {
   Button,
   IconButton,
   Link,
+  Box,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,7 +17,7 @@ function Header() {
   const loginNavigate = () => {
     navigate("/login");
   };
-  
+
   const registerNavigate = () => {
     navigate("/register");
   };
@@ -34,14 +35,16 @@ function Header() {
         </Typography>
 
         {/* Login Button */}
-        <Button color="inherit" variant="outlined" onClick={loginNavigate}>
-          Login
-        </Button>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button color="inherit" variant="outlined" onClick={loginNavigate}>
+            Login
+          </Button>
 
-        {/* Register Button */}
-        <Button color="inherit" variant="outlined" onClick={registerNavigate}>
-          Register
-        </Button>
+          {/* Register Button */}
+          <Button color="inherit" variant="outlined" onClick={registerNavigate}>
+            Register
+          </Button>
+        </Box>
       </Toolbar>
     </AppBar>
   );

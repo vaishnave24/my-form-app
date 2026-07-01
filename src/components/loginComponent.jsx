@@ -1,4 +1,4 @@
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { loginUser } from "../api/authService";
 
@@ -29,52 +29,73 @@ function LoginPageComponent() {
     <>
       <Box
         sx={{
-          height: "80vh",
+          minHeight: "75vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#d3e3fd",
-          padding: 2,
+          p: 2,
         }}
       >
         <Paper
           sx={{
-            width: {
-              xs: "100%",
-              md: "500px",
-              sm: "80%",
+            width: "100%",
+            maxWidth: "500px",
+            minHeight: "auto",
+            p: {
+              xs: 2,
+              sm: 3,
+              md: 4,
             },
-            height: {
-              xs: "auto",
-              sm: "400",
-              md: "500px",
-            },
-            padding: 4,
             borderRadius: 4,
           }}
         >
-          <form onSubmit={handelSubmit}>
-            <input
-              type="text"
+          <Typography variant="h5" mb={3} textAlign="center">
+            Login
+          </Typography>
+
+          <Box
+            component="form"
+            onSubmit={handelSubmit}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 3,
+            }}
+          >
+            <TextField
+              label="Enter Email"
               name="email"
-              placeholder="Enter user name"
               value={form.email}
               onChange={handelChange}
+              fullWidth
             />
-            <br />
-            <input
-              type="password"
+
+            <TextField
+              label="Enter Password"
               name="password"
+              type="password"
               value={form.password}
               onChange={handelChange}
-              placeholder="Enter password"
+              fullWidth
             />
-            <br />
-            <div>
-              <Button type="submit">Submit</Button>
-              <Button>Cancel</Button>
-            </div>
-          </form>
+
+            <Box
+              sx={{
+                display: "flex",
+                gap: 2,
+                width: "100%",
+              }}
+            >
+              <Button variant="contained" type="submit" fullWidth>
+                Submit
+              </Button>
+
+              <Button variant="outlined" type="button" fullWidth>
+                Cancel
+              </Button>
+            </Box>
+          </Box>
         </Paper>
       </Box>
     </>
